@@ -1,0 +1,42 @@
+{
+  "name": "log_escalation",
+  "description": "Log why the call is being handed to a human claims specialist. Call this immediately before transfer_to_human when there is injury, theft, a coverage dispute, an API failure you cannot recover from, no garage in city, or the caller asks for a person. Do not call it for a successful FNOL the agent can complete.",
+  "pre_call_message": "I am connecting you to a specialist.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "reason": {
+        "type": "string",
+        "description": "Short reason, for example injury reported, expired policy, caller requested human."
+      },
+      "policy_number": {
+        "type": "string",
+        "description": "Policy number if known."
+      },
+      "claim_id": {
+        "type": "string",
+        "description": "Claim ID if known."
+      },
+      "notes": {
+        "type": "string",
+        "description": "One-line context for the specialist."
+      }
+    },
+    "required": ["reason"]
+  },
+  "key": "custom_task",
+  "value": {
+    "method": "POST",
+    "param": {
+      "reason": "%(reason)s",
+      "policy_number": "%(policy_number)s",
+      "claim_id": "%(claim_id)s",
+      "notes": "%(notes)s"
+    },
+    "url": "{{PUBLIC_BASE_URL}}/v1/escalations",
+    "api_token": "Bearer {{DEMO_API_KEY}}",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

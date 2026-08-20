@@ -1,0 +1,25 @@
+{
+  "name": "get_claim_status",
+  "description": "Fetch status for an existing Digit motor claim. Call when the caller already has a claim ID, or after lookup_policy returned openClaimId and they want an update. Do not call this for a brand-new accident that has not been filed. Do not invent a claim ID.",
+  "pre_call_message": "Let me check that claim.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "claim_id": {
+        "type": "string",
+        "description": "Claim ID such as CLM-2026-1001."
+      }
+    },
+    "required": ["claim_id"]
+  },
+  "key": "custom_task",
+  "value": {
+    "method": "GET",
+    "param": {
+      "claim_id": "%(claim_id)s"
+    },
+    "url": "{{PUBLIC_BASE_URL}}/v1/claims/status",
+    "api_token": "Bearer {{DEMO_API_KEY}}",
+    "headers": {}
+  }
+}

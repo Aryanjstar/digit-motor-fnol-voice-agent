@@ -1,0 +1,37 @@
+{
+  "name": "find_cashless_garages",
+  "description": "Find Digit cashless workshops near the incident city. Call only after lookup_policy showed an active comprehensive policy with own-damage cover. Pass the verified policy_number. Use this when the caller wants a garage, asks what is nearby, or asks for the cheapest/fastest cashless option. Never call this to file a claim. If the preferred locality is full, tell the caller the recommended alternative from the response instead of inventing availability.",
+  "pre_call_message": "I am checking cashless garages near you.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "city": {
+        "type": "string",
+        "description": "City of the accident, for example Bengaluru or Bangalore."
+      },
+      "locality": {
+        "type": "string",
+        "description": "Neighbourhood if the caller named one, for example Koramangala."
+      },
+      "policy_number": {
+        "type": "string",
+        "description": "Verified policy number from lookup_policy, for example POL-DGT-4821."
+      }
+    },
+    "required": ["city", "policy_number"]
+  },
+  "key": "custom_task",
+  "value": {
+    "method": "POST",
+    "param": {
+      "city": "%(city)s",
+      "locality": "%(locality)s",
+      "policy_number": "%(policy_number)s"
+    },
+    "url": "{{PUBLIC_BASE_URL}}/v1/garages/search",
+    "api_token": "Bearer {{DEMO_API_KEY}}",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

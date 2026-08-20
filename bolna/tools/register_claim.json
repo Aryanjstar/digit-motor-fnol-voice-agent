@@ -1,0 +1,82 @@
+{
+  "name": "register_claim",
+  "description": "Create a motor FNOL claim. Call this ONLY after the caller has clearly confirmed the vehicle, incident summary, deductible, and garage choice. Set caller_confirmed to true only for an explicit yes such as 'yes', 'go ahead', or 'please register it'. Never call this to check eligibility, quote a price, or preview a claim ID. If anyone is injured, do not call this tool; escalate instead. If the caller has not confirmed, do not call it.",
+  "pre_call_message": "I am registering the claim now.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "policy_number": {
+        "type": "string",
+        "description": "Verified policy number, for example POL-DGT-4821."
+      },
+      "vehicle_registration": {
+        "type": "string",
+        "description": "Verified registration if you have it."
+      },
+      "incident_date": {
+        "type": "string",
+        "description": "Incident date as YYYY-MM-DD, or the word today."
+      },
+      "incident_city": {
+        "type": "string",
+        "description": "City where the accident happened."
+      },
+      "incident_locality": {
+        "type": "string",
+        "description": "Locality if known."
+      },
+      "incident_description": {
+        "type": "string",
+        "description": "One-sentence description of the damage, for example front bumper scrape at a signal."
+      },
+      "injury": {
+        "type": "boolean",
+        "description": "True if any person was hurt. If true the API will refuse registration."
+      },
+      "third_party_involved": {
+        "type": "boolean",
+        "description": "True if another vehicle or property was involved."
+      },
+      "garage_id": {
+        "type": "string",
+        "description": "garageId from find_cashless_garages for the garage the caller accepted, for example GRG-BLR-IND."
+      },
+      "caller_confirmed": {
+        "type": "boolean",
+        "description": "Must be true only after explicit confirmation. Otherwise do not call this function."
+      },
+      "idempotency_key": {
+        "type": "string",
+        "description": "Stable key for this call, such as policy number plus incident date, to avoid duplicate filings if the caller repeats yes."
+      }
+    },
+    "required": [
+      "policy_number",
+      "incident_city",
+      "incident_description",
+      "caller_confirmed"
+    ]
+  },
+  "key": "custom_task",
+  "value": {
+    "method": "POST",
+    "param": {
+      "policy_number": "%(policy_number)s",
+      "vehicle_registration": "%(vehicle_registration)s",
+      "incident_date": "%(incident_date)s",
+      "incident_city": "%(incident_city)s",
+      "incident_locality": "%(incident_locality)s",
+      "incident_description": "%(incident_description)s",
+      "injury": "%(injury)s",
+      "third_party_involved": "%(third_party_involved)s",
+      "garage_id": "%(garage_id)s",
+      "caller_confirmed": "%(caller_confirmed)s",
+      "idempotency_key": "%(idempotency_key)s"
+    },
+    "url": "{{PUBLIC_BASE_URL}}/v1/claims",
+    "api_token": "Bearer {{DEMO_API_KEY}}",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

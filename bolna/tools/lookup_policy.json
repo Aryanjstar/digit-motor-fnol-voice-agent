@@ -1,0 +1,36 @@
+{
+  "name": "lookup_policy",
+  "description": "Look up a Digit motor policy and return coverage, deductible, expiry, and any open claim. Call this as soon as the caller has given a policy number or vehicle registration for a new claim, coverage question, or existing-claim lookup. Do not call it with guessed IDs. Do not use this tool to register a claim.",
+  "pre_call_message": "Let me pull up that policy.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "policy_number": {
+        "type": "string",
+        "description": "Policy number if the caller provided one, for example POL-DGT-4821. Omit if they only gave a registration."
+      },
+      "vehicle_registration": {
+        "type": "string",
+        "description": "Indian vehicle registration as spoken, with or without spaces or hyphens, for example KA03MN4821."
+      },
+      "phone": {
+        "type": "string",
+        "description": "Registered mobile number if needed to disambiguate. Prefer {from_number} when available."
+      }
+    }
+  },
+  "key": "custom_task",
+  "value": {
+    "method": "POST",
+    "param": {
+      "policy_number": "%(policy_number)s",
+      "vehicle_registration": "%(vehicle_registration)s",
+      "phone": "%(phone)s"
+    },
+    "url": "{{PUBLIC_BASE_URL}}/v1/policies/lookup",
+    "api_token": "Bearer {{DEMO_API_KEY}}",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
