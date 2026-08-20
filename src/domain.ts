@@ -274,6 +274,17 @@ export function createStore(): Store {
   };
 }
 
+export function resetStore(store: Store): void {
+  const fresh = createStore();
+  store.policies = fresh.policies;
+  store.garages = fresh.garages;
+  store.claims = fresh.claims;
+  store.escalations = fresh.escalations;
+  store.idempotency = fresh.idempotency;
+  store.claimSeq = fresh.claimSeq;
+  store.escalationSeq = fresh.escalationSeq;
+}
+
 function fail(code: string, speak: string, details?: Record<string, unknown>): ApiFailure {
   return { ok: false, code, speak, details };
 }

@@ -65,6 +65,8 @@ Business rules live in the API so a prompt cannot invent cover, file without a y
 
 All routes except `/health` and `/docs` require `Authorization: Bearer $DEMO_API_KEY`.
 
+`POST /v1/demo/reset` restores the seeded policies and the open Sneha claim so chat tests can be replayed.
+
 Every JSON body includes a `speak` string. Bolna should say that, not the raw payload.
 
 ### Local run

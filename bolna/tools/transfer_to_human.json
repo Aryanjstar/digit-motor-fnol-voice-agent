@@ -1,0 +1,35 @@
+{
+  "name": "transfer_to_human",
+  "description": "Transfer the live phone call to a Digit claims specialist. Call this AFTER log_escalation when someone is injured, the car was stolen, an FIR is needed, cover is disputed, the policy is expired and the caller still needs help, the API returned HUMAN_REQUIRED, there is no garage in city, or the caller clearly asks for a person. Do not transfer after a successful own-damage claim registration. Do not transfer merely because the caller paused or said hmm.",
+  "pre_call_message": "I am connecting you to a specialist. Please stay on the line.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "reason": {
+        "type": "string",
+        "description": "Short reason for the transfer, for example injury reported or caller asked for a human."
+      },
+      "summary": {
+        "type": "string",
+        "description": "One-line summary of the conversation so the specialist has context."
+      },
+      "call_sid": {
+        "type": "string",
+        "description": "The live call id. Use {call_sid} when the system provides it."
+      }
+    },
+    "required": ["reason"]
+  },
+  "key": "transfer_call",
+  "value": {
+    "method": "POST",
+    "param": {
+      "call_transfer_number": "{{TRANSFER_NUMBER}}",
+      "reason": "%(reason)s",
+      "summary": "%(summary)s",
+      "call_sid": "%(call_sid)s"
+    },
+    "url": null,
+    "headers": {}
+  }
+}

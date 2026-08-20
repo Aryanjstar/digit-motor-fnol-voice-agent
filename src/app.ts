@@ -9,6 +9,7 @@ import {
   getClaim,
   lookupPolicy,
   registerClaim,
+  resetStore,
   searchGarages,
   type Store,
 } from "./domain.js";
@@ -341,6 +342,22 @@ export async function buildApp(options: AppOptions): Promise<FastifyInstance> {
         "Seeded demonstration data only. Not affiliated with Go Digit General Insurance Limited production systems.",
       scenarios: DEMO_SCENARIOS,
     }),
+  );
+
+  app.post(
+    "/v1/demo/reset",
+    {
+      schema: {
+        tags: ["demo"],
+        summary: "Restore seeded policies, garages, and claims for repeatable demos",
+        security: [{ bearerAuth: [] }],
+      },
+    },
+    async (request) => {
+      request.log.info({ action: "demo_reset" });
+      resetStore(store);
+      return { ok: true, speak: "Demo data restored to the original seed." };
+    },
   );
 
   return app;
