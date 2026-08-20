@@ -27,7 +27,7 @@
       "vehicle_registration": "%(vehicle_registration)s",
       "phone": "%(phone)s"
     },
-    "url": "{{PUBLIC_BASE_URL}}/v1/policies/lookup",
+    "url": "https://ca-digit-fnol-api.politebeach-056a6d51.eastus2.azurecontainerapps.io/v1/policies/lookup",
     "api_token": "Bearer {{DEMO_API_KEY}}",
     "headers": {
       "Content-Type": "application/json"

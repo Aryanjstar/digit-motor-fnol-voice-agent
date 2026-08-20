@@ -18,7 +18,7 @@
     "param": {
       "claim_id": "%(claim_id)s"
     },
-    "url": "{{PUBLIC_BASE_URL}}/v1/claims/status",
+    "url": "https://ca-digit-fnol-api.politebeach-056a6d51.eastus2.azurecontainerapps.io/v1/claims/status",
     "api_token": "Bearer {{DEMO_API_KEY}}",
     "headers": {}
   }

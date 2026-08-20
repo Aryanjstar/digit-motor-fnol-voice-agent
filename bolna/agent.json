@@ -1,0 +1,14 @@
+{
+  "agent_name": "Digit Motor FNOL — Maya",
+  "agent_id": "e32b84cc-7eb9-4669-893b-f05dfc6d30e6",
+  "platform": "https://platform.bolna.ai",
+  "demo_api": "https://ca-digit-fnol-api.politebeach-056a6d51.eastus2.azurecontainerapps.io",
+  "tools": [
+    "lookup_policy",
+    "find_cashless_garages",
+    "register_claim",
+    "get_claim_status",
+    "log_escalation"
+  ],
+  "notes": "Chat-test on the dashboard. Do not place a phone call until credits are approved."
+}

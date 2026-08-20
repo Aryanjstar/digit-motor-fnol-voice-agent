@@ -6,6 +6,19 @@ The agent is **Maya**, a Digit claims specialist. She verifies a policy, checks 
 
 > **Not an official Digit product.** Go Digit is a real listed insurer (NSE: `GODIGIT`) with a 24/7 motor helpline. The HTTP API in this repo is a **demonstration integration** that models that workflow. It is not Digit’s production claims system.
 
+## Live demo
+
+| Item | Value |
+| --- | --- |
+| GitHub | https://github.com/Aryanjstar/digit-motor-fnol-voice-agent |
+| Agent name | Digit Motor FNOL — Maya |
+| Agent ID | `e32b84cc-7eb9-4669-893b-f05dfc6d30e6` |
+| Platform | https://platform.bolna.ai |
+| Demo API | https://ca-digit-fnol-api.politebeach-056a6d51.eastus2.azurecontainerapps.io |
+| Swagger | https://ca-digit-fnol-api.politebeach-056a6d51.eastus2.azurecontainerapps.io/docs |
+
+Five custom tools are attached on the agent and call this API. Use **Chat with agent** on the dashboard. Do not place a phone call until credits are explicitly approved.
+
 ## Problem
 
 Digit already registers motor claims by phone (“no forms”, target about seven minutes). Callers are often roadside, stressed, and unable to use an app. A voice agent can complete routine own-damage FNOL, keep humans for injury, theft, and disputes, and still produce a claim ID the caller can repeat.
@@ -89,7 +102,7 @@ Koramangala cashless (`GRG-BLR-KOR`) is **at capacity**. Indiranagar (`GRG-BLR-I
 | Chat tests | [`bolna/chat-test-matrix.md`](bolna/chat-test-matrix.md) |
 | Demo script | [`bolna/demo-script.md`](bolna/demo-script.md) |
 
-Replace `{{PUBLIC_BASE_URL}}` and `{{DEMO_API_KEY}}` in the tool JSON with the deployed API URL and key. Do not commit the live key.
+Tool JSON in `bolna/tools/` uses the live Azure URL. `api_token` stays `Bearer {{DEMO_API_KEY}}` in git. The live agent already has the tools attached.
 
 ### Chat first
 
